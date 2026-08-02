@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cài đặt · ShopAdmin</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/shared-components.css" />
+    <link rel="stylesheet" href="../css/settings.css" />
+</head>
+
+<body data-page="settings">
+    <div class="app-shell">
+        <!-- ==================== SIDEBAR ==================== -->
+        <aside class="sidebar" id="sidebar"></aside>
+
+        <!-- ==================== MAIN ==================== -->
+        <div class="main">
+            <header class="header">
+                <div>
+                    <div class="header__title">Cài đặt</div>
+                    <div class="header__subtitle">Thông tin website, liên hệ và cấu hình SEO.</div>
+                </div>
+                <div class="header__actions">
+                    <button class="header__icon-btn" aria-label="Thông báo">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                        <span class="dot"></span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="content">
+                <form id="settings-form" novalidate>
+                    <div class="settings-grid">
+
+                        <!-- ---- Thương hiệu (Logo / Banner) ---- -->
+                        <div class="card settings-section">
+                            <div class="settings-section__header">
+                                <div class="settings-section__title">Thương hiệu</div>
+                                <div class="settings-section__desc">Logo và banner hiển thị trên website bán hàng.</div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group form-group--full">
+                                    <label class="form-label">Logo</label>
+                                    <div class="single-image-upload" id="logo-uploader">
+                                        <div class="single-image-upload__preview" id="logo-preview">
+                                            <svg viewBox="0 0 24 24" fill="none">
+                                                <path
+                                                    d="M20.59 13.41L11 3.83A2 2 0 009.59 3.24H4a1 1 0 00-1 1v5.59a2 2 0 00.59 1.41l9.58 9.59a2 2 0 002.83 0l5.59-5.59a2 2 0 000-2.83z"
+                                                    stroke="currentColor" stroke-width="1.6" />
+                                            </svg>
+                                        </div>
+                                        <div class="single-image-upload__actions">
+                                            <div class="single-image-upload__buttons">
+                                                <button type="button" class="btn btn--ghost btn--sm"
+                                                    id="logo-select-btn">Chọn ảnh</button>
+                                                <button type="button" class="btn btn--ghost btn--sm"
+                                                    id="logo-remove-btn" style="display:none;">Xóa</button>
+                                            </div>
+                                            <div class="single-image-upload__hint">Khuyến nghị ảnh vuông, tối đa 5MB.
+                                            </div>
+                                        </div>
+                                        <input type="file" id="logo-input"
+                                            accept="image/jpeg,image/png,image/webp,image/gif" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group form-group--full">
+                                    <label class="form-label">Banner trang chủ</label>
+                                    <div class="single-image-upload" id="banner-uploader">
+                                        <div class="single-image-upload__preview single-image-upload__preview--banner"
+                                            id="banner-preview">
+                                            <svg viewBox="0 0 24 24" fill="none">
+                                                <path
+                                                    d="M20.59 13.41L11 3.83A2 2 0 009.59 3.24H4a1 1 0 00-1 1v5.59a2 2 0 00.59 1.41l9.58 9.59a2 2 0 002.83 0l5.59-5.59a2 2 0 000-2.83z"
+                                                    stroke="currentColor" stroke-width="1.6" />
+                                            </svg>
+                                        </div>
+                                        <div class="single-image-upload__actions">
+                                            <div class="single-image-upload__buttons">
+                                                <button type="button" class="btn btn--ghost btn--sm"
+                                                    id="banner-select-btn">Chọn ảnh</button>
+                                                <button type="button" class="btn btn--ghost btn--sm"
+                                                    id="banner-remove-btn" style="display:none;">Xóa</button>
+                                            </div>
+                                            <div class="single-image-upload__hint">Khuyến nghị tỉ lệ ngang, tối đa 5MB.
+                                            </div>
+                                        </div>
+                                        <input type="file" id="banner-input"
+                                            accept="image/jpeg,image/png,image/webp,image/gif" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ---- Thông tin liên hệ ---- -->
+                        <div class="card settings-section">
+                            <div class="settings-section__header">
+                                <div class="settings-section__title">Thông tin website</div>
+                                <div class="settings-section__desc">Hiển thị công khai ở footer / trang liên hệ.</div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group form-group--full">
+                                    <label class="form-label" for="st-site-name">Tên website *</label>
+                                    <div class="form-input-wrap">
+                                        <input type="text" id="st-site-name" class="form-input"
+                                            placeholder="VD: ShopAdmin Store" />
+                                    </div>
+                                    <div class="form-error" id="st-site-name-error"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="st-hotline">Hotline</label>
+                                    <div class="form-input-wrap">
+                                        <input type="text" id="st-hotline" class="form-input"
+                                            placeholder="09xx xxx xxx" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="st-email">Email liên hệ</label>
+                                    <div class="form-input-wrap">
+                                        <input type="email" id="st-email" class="form-input"
+                                            placeholder="contact@shop.vn" />
+                                    </div>
+                                    <div class="form-error" id="st-email-error"></div>
+                                </div>
+
+                                <div class="form-group form-group--full">
+                                    <label class="form-label" for="st-address">Địa chỉ</label>
+                                    <div class="form-input-wrap">
+                                        <input type="text" id="st-address" class="form-input"
+                                            placeholder="Số nhà, đường, quận/huyện, tỉnh/thành" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="st-facebook">Facebook</label>
+                                    <div class="form-input-wrap">
+                                        <input type="url" id="st-facebook" class="form-input"
+                                            placeholder="https://facebook.com/..." />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="st-zalo">Zalo</label>
+                                    <div class="form-input-wrap">
+                                        <input type="text" id="st-zalo" class="form-input"
+                                            placeholder="Số Zalo hoặc link zalo.me/..." />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="st-youtube">Youtube</label>
+                                    <div class="form-input-wrap">
+                                        <input type="url" id="st-youtube" class="form-input"
+                                            placeholder="https://youtube.com/..." />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ---- SEO ---- -->
+                        <div class="card settings-section">
+                            <div class="settings-section__header">
+                                <div class="settings-section__title">SEO</div>
+                                <div class="settings-section__desc">Ảnh hưởng cách website hiển thị trên Google và mạng
+                                    xã hội.</div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group form-group--full">
+                                    <label class="form-label" for="st-meta-title">Meta Title</label>
+                                    <div class="form-input-wrap">
+                                        <input type="text" id="st-meta-title" class="form-input"
+                                            placeholder="Tiêu đề hiển thị trên tab trình duyệt / kết quả tìm kiếm"
+                                            maxlength="70" />
+                                    </div>
+                                    <div class="form-hint"><span id="st-meta-title-count">0</span>/70 ký tự</div>
+                                </div>
+
+                                <div class="form-group form-group--full">
+                                    <label class="form-label" for="st-meta-desc">Meta Description</label>
+                                    <textarea id="st-meta-desc" class="form-input" rows="3" maxlength="160"
+                                        placeholder="Mô tả ngắn gọn hiển thị dưới tiêu đề trên Google"></textarea>
+                                    <div class="form-hint"><span id="st-meta-desc-count">0</span>/160 ký tự</div>
+                                </div>
+
+                                <div class="form-group form-group--full">
+                                    <label class="form-label" for="st-keywords">Keywords</label>
+                                    <div class="form-input-wrap">
+                                        <input type="text" id="st-keywords" class="form-input"
+                                            placeholder="Phân cách bằng dấu phẩy, VD: thời trang, giày dép, phụ kiện" />
+                                    </div>
+                                    <div class="form-hint">Ít ảnh hưởng SEO hiện đại nhưng vẫn dùng cho vài công cụ.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="settings-save-bar">
+                        <span class="settings-save-bar__status" id="settings-save-status"></span>
+                        <button type="button" class="btn btn--ghost" id="settings-reset-btn">Hoàn tác thay đổi</button>
+                        <button type="submit" class="btn btn--primary" id="settings-save-btn">Lưu cài đặt</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../js/entry.js"></script>
+</body>
+
+</html>

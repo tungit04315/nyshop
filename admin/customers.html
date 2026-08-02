@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Khách hàng · ShopAdmin</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/customers.css" />
+</head>
+
+<body data-page="customers">
+    <div class="app-shell">
+        <!-- ==================== SIDEBAR ==================== -->
+        <aside class="sidebar" id="sidebar"></aside>
+
+        <!-- ==================== MAIN ==================== -->
+        <div class="main">
+            <header class="header">
+                <div>
+                    <div class="header__title">Khách hàng</div>
+                    <div class="header__subtitle">Quản lý danh sách và trạng thái tài khoản khách hàng.</div>
+                </div>
+
+                <div class="header__actions">
+                    <button class="header__icon-btn" aria-label="Thông báo">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                        <span class="dot"></span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="content">
+                <!-- ---- Filter bar ---- -->
+                <div class="filter-bar">
+                    <div class="filter-search">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+                            <path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                        <input type="text" id="customer-search"
+                            placeholder="Tìm theo tên, email hoặc số điện thoại..." />
+                    </div>
+
+                    <select class="filter-select" id="customer-filter-status">
+                        <option value="all">Tất cả trạng thái</option>
+                        <option value="pending">Chờ duyệt</option>
+                        <option value="approved">Đã duyệt</option>
+                        <option value="locked">Đã khóa</option>
+                        <option value="rejected">Đã từ chối</option>
+                    </select>
+
+                    <select class="filter-select" id="customer-sort">
+                        <option value="createdAt_desc">Mới đăng ký nhất</option>
+                        <option value="createdAt_asc">Cũ nhất</option>
+                        <option value="fullName_asc">Tên A → Z</option>
+                        <option value="fullName_desc">Tên Z → A</option>
+                    </select>
+                </div>
+
+                <!-- ---- Bảng khách hàng ---- -->
+                <div class="card card--flush">
+                    <div class="table-toolbar" style="padding: 20px 20px 0;">
+                        <div class="table-toolbar__count">
+                            Hiển thị <strong id="customer-count-shown">0</strong> / <strong
+                                id="customer-count-total">0</strong> khách hàng
+                        </div>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Khách hàng</th>
+                                    <th>Số điện thoại</th>
+                                    <th class="th-sortable" data-sort="createdAt">
+                                        Ngày đăng ký
+                                        <svg viewBox="0 0 24 24" fill="none">
+                                            <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2" />
+                                        </svg>
+                                    </th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customers-table-body">
+                                <tr>
+                                    <td colspan="5">
+                                        <div class="skeleton" style="height: 20px;"></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination" style="margin: 0 20px 20px;">
+                        <div class="pagination__info" id="pagination-info">Trang 1</div>
+                        <div class="pagination__controls" id="pagination-controls"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== Drawer chi tiết khách hàng ====================
+                 Đặt bên trong .main để router SPA (spa-router.js) swap gọn trong 1 lần,
+                 không để lại phần tử mồ côi khi điều hướng sang trang khác. -->
+            <div class="drawer-overlay" id="drawer-overlay"></div>
+            <aside class="drawer" id="customer-drawer">
+                <div class="drawer__header">
+                    <div class="drawer__title">Chi tiết khách hàng</div>
+                    <button class="drawer__close" id="drawer-close" aria-label="Đóng">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="drawer__body" id="drawer-body">
+                    <!-- Nội dung được render động bởi customers.js -->
+                </div>
+                <div class="drawer__footer" id="drawer-footer">
+                    <!-- Các nút thao tác được render động bởi customers.js -->
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script type="module" src="../js/entry.js"></script>
+</body>
+
+</html>

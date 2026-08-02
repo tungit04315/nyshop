@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập Admin · ShopAdmin</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/login.css" />
+</head>
+
+<body>
+    <div class="login-shell">
+        <!-- ==================== Panel trái: thương hiệu ==================== -->
+        <div class="login-brand">
+            <div class="login-brand__grid"></div>
+
+            <div class="login-brand__top">
+                <div class="login-brand__mark">SA</div>
+                <div>
+                    <div class="login-brand__name">ShopAdmin</div>
+                    <div class="login-brand__tag">Bảng điều khiển quản trị</div>
+                </div>
+            </div>
+
+            <div class="login-brand__body">
+                <h1 class="login-brand__headline">
+                    Quản lý cửa hàng<br />
+                    của bạn <span>thông minh hơn</span>
+                </h1>
+                <p class="login-brand__desc">
+                    Theo dõi đơn hàng, khách hàng, doanh thu và toàn bộ hoạt động kinh doanh
+                    trong một nền tảng duy nhất — nhanh, an toàn và trực quan.
+                </p>
+            </div>
+
+            <div class="login-brand__stats">
+                <div>
+                    <div class="login-brand__stat-value">10K+</div>
+                    <div class="login-brand__stat-label">Đơn hàng đã xử lý</div>
+                </div>
+                <div>
+                    <div class="login-brand__stat-value">99.9%</div>
+                    <div class="login-brand__stat-label">Thời gian hoạt động</div>
+                </div>
+                <div>
+                    <div class="login-brand__stat-value">24/7</div>
+                    <div class="login-brand__stat-label">Giám sát hệ thống</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== Panel phải: form đăng nhập ==================== -->
+        <div class="login-panel">
+            <div class="login-card">
+                <div class="login-card__header">
+                    <h2 class="login-card__title">Chào mừng trở lại</h2>
+                    <p class="login-card__subtitle">Đăng nhập bằng tài khoản quản trị viên để tiếp tục.</p>
+                </div>
+
+                <form id="login-form" novalidate>
+                    <div class="form-group">
+                        <label class="form-label" for="login-email">Email</label>
+                        <div class="form-input-wrap">
+                            <input type="email" id="login-email" class="form-input" placeholder="admin@shop.com"
+                                autocomplete="username" />
+                        </div>
+                        <div class="form-error" id="login-email-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="login-form__top-row">
+                            <label class="form-label" for="login-password" style="margin-bottom: 0;">Mật khẩu</label>
+                            <button type="button" class="login-form__forgot" id="login-forgot">Quên mật khẩu?</button>
+                        </div>
+                        <div class="form-input-wrap">
+                            <input type="password" id="login-password" class="form-input" placeholder="••••••••"
+                                autocomplete="current-password" />
+                            <button type="button" class="form-input-icon-btn" id="toggle-password"
+                                aria-label="Hiện mật khẩu">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="form-error" id="login-password-error"></div>
+                    </div>
+
+                    <button type="submit" class="btn btn--primary btn--full" id="login-submit">
+                        Đăng nhập
+                    </button>
+                </form>
+
+                <div class="login-card__footer">
+                    © 2026 ShopAdmin. Chỉ dành cho quản trị viên được ủy quyền.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay loading toàn màn hình khi xác thực -->
+    <div class="auth-loading-overlay" id="auth-loading-overlay">
+        <div class="btn-spinner" style="border-top-color: var(--color-accent);"></div>
+        <div class="auth-loading-overlay__text">Đang xác thực tài khoản...</div>
+    </div>
+
+    <script type="module" src="../js/login.js"></script>
+</body>
+
+</html>
