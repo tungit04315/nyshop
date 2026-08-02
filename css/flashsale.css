@@ -1,0 +1,20 @@
+/* ============================================================
+   flashsale.css — Trang Flash Sale
+   Phần lớn UI dùng chung từ shared-components.css.
+   ============================================================ */
+
+.fs-name-cell__title {
+    font-weight: 600;
+    font-size: 13.5px;
+}
+
+.fs-name-cell__sub {
+    font-size: 11.5px;
+    color: var(--color-text-secondary);
+    margin-top: 1px;
+}
+
+.fs-product-count {
+    font-size: 12.5px;
+    color: var(--color-text-secondary);
+}

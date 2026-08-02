@@ -1,0 +1,65 @@
+/* ============================================================
+   variables.css — Design Tokens dùng chung cho toàn bộ Storefront
+   Phong cách: Premium Commerce 2026 (Apple / Nike / Samsung / Stripe / Notion)
+   Nền trắng · Khoảng trắng lớn · Bo góc mềm · Shadow nhẹ · Accent #2563EB
+   ============================================================ */
+
+:root {
+  /* ---- Màu nền & bề mặt ---- */
+  --color-bg: #FFFFFF;
+  --color-bg-soft: #F8FAFC;
+  --color-bg-dark: #0B0F19;
+  --color-surface: #FFFFFF;
+  --color-border: rgba(15, 23, 42, 0.08);
+  --color-border-strong: rgba(15, 23, 42, 0.14);
+
+  /* ---- Màu chữ ---- */
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #64748B;
+  --color-text-muted: #94A3B8;
+  --color-text-inverse: #FFFFFF;
+
+  /* ---- Accent ---- */
+  --color-accent: #2563EB;
+  --color-accent-dark: #1D4ED8;
+  --color-accent-light: #EEF3FF;
+  --color-accent-ring: rgba(37, 99, 235, 0.16);
+
+  /* ---- Trạng thái ---- */
+  --color-success: #16A34A;
+  --color-success-light: #EAFBF1;
+  --color-danger: #DC2626;
+  --color-danger-light: #FDECEC;
+  --color-warning: #D97706;
+  --color-warning-light: #FEF6E7;
+
+  /* ---- Bo góc ---- */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 999px;
+
+  /* ---- Bóng đổ mềm ---- */
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 12px 32px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 24px 60px rgba(15, 23, 42, 0.12);
+  --shadow-accent: 0 16px 32px rgba(37, 99, 235, 0.24);
+
+  /* ---- Layout ---- */
+  --container-width: 1296px;
+  --container-pad: 32px;
+  --header-height: 84px;
+  --header-height-scrolled: 68px;
+
+  /* ---- Chuyển động ---- */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.15s var(--ease);
+  --transition-base: 0.3s var(--ease);
+  --transition-slow: 0.5s var(--ease-spring);
+
+  /* ---- Typography scale ---- */
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}

@@ -1,0 +1,341 @@
+/* ============================================================
+   order-lookup.css — Trang "Tra cứu đơn hàng" (khách vãng lai)
+   Dùng chung design token với variables.css, không đụng tới các
+   file CSS khác đang có (đúng yêu cầu "không thay đổi giao diện").
+   ============================================================ */
+
+.lookup-section {
+  padding: 48px 0 96px;
+}
+
+/* ---- Form tra cứu ---- */
+.lookup-form {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: 640px;
+  margin: 0 auto 40px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.lookup-form__field {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.lookup-form__submit {
+  margin-top: 30px;
+  white-space: nowrap;
+  gap: 8px;
+}
+
+@media (max-width: 640px) {
+  .lookup-form {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .lookup-form__submit {
+    margin-top: 4px;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ---- Trạng thái rỗng / lỗi ---- */
+.lookup-empty {
+  max-width: 480px;
+  margin: 24px auto;
+  text-align: center;
+  padding: 40px 24px;
+  color: var(--color-text-secondary);
+}
+
+.lookup-empty__icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 16px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lookup-empty__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 6px;
+}
+
+/* ---- Skeleton lúc đang tải ---- */
+.lookup-skeleton-card {
+  max-width: 780px;
+  margin: 0 auto 20px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
+/* ---- Danh sách kết quả ---- */
+.lookup-results {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.lookup-results__count {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  margin-bottom: 4px;
+}
+
+/* ---- 1 thẻ đơn hàng ---- */
+.order-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  animation: orderCardIn 0.4s var(--ease-spring);
+}
+
+@keyframes orderCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.order-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+}
+
+.order-card__code {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.order-card__date {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+/* ---- Danh sách sản phẩm ---- */
+.order-card__items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 24px;
+}
+
+.order-lookup-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.order-lookup-item__media {
+  width: 48px;
+  height: 48px;
+  flex: none;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--color-bg-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.order-lookup-item__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.order-lookup-item__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.order-lookup-item__name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.order-lookup-item__meta {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.order-lookup-item__price {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.order-card__totals {
+  padding: 16px 24px;
+  border-top: 1px dashed var(--color-border);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.order-card__totals strong {
+  font-size: 16px;
+  color: var(--color-accent-dark);
+}
+
+/* ---- Timeline trạng thái ---- */
+.order-timeline {
+  padding: 22px 24px 26px;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-soft);
+}
+
+.order-timeline__title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 18px;
+}
+
+.order-timeline__steps {
+  display: flex;
+  align-items: flex-start;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.order-timeline__step {
+  flex: 1;
+  min-width: 92px;
+  text-align: center;
+  position: relative;
+}
+
+.order-timeline__dot {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg);
+  border: 2px solid var(--color-border-strong);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 8px;
+  font-size: 12px;
+  font-weight: 700;
+  transition: var(--transition-base);
+}
+
+.order-timeline__step::before {
+  content: "";
+  position: absolute;
+  top: 13px;
+  left: -50%;
+  width: 100%;
+  height: 2px;
+  background: var(--color-border-strong);
+  z-index: 0;
+}
+
+.order-timeline__step:first-child::before {
+  display: none;
+}
+
+.order-timeline__label {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.order-timeline__time {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+/* Bước đã hoàn thành */
+.order-timeline__step--done .order-timeline__dot {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+.order-timeline__step--done::before {
+  background: var(--color-accent);
+}
+
+.order-timeline__step--done .order-timeline__label {
+  color: var(--color-text-primary);
+}
+
+/* Bước hiện tại (đang ở đây) */
+.order-timeline__step--current .order-timeline__dot {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+  box-shadow: 0 0 0 4px var(--color-accent-ring);
+}
+
+/* Đơn bị hủy */
+.order-card--cancelled .order-timeline {
+  background: var(--color-danger-light);
+}
+
+.order-cancelled-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  background: var(--color-danger-light);
+  color: var(--color-danger);
+  font-size: 14px;
+  font-weight: 600;
+  border-top: 1px solid var(--color-border);
+}
+
+@media (max-width: 560px) {
+  .order-card__head {
+    flex-direction: column;
+  }
+
+  .order-timeline__steps {
+    justify-content: flex-start;
+  }
+
+  .order-timeline__step {
+    min-width: 84px;
+  }
+}

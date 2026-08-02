@@ -1,0 +1,26 @@
+/* ============================================================
+   products.css — Trang Quản lý Sản phẩm
+   Phần lớn UI dùng chung từ shared-components.css, file này chỉ
+   chứa các style đặc thù riêng cho trang Sản phẩm.
+   ============================================================ */
+
+.product-price__sale {
+    font-weight: 700;
+    color: var(--color-text-primary);
+}
+
+.product-price__original {
+    font-size: 11.5px;
+    color: var(--color-text-muted);
+    text-decoration: line-through;
+    margin-top: 1px;
+}
+
+.stock-value--low {
+    color: var(--color-danger);
+    font-weight: 700;
+}
+
+.stock-value--out {
+    color: var(--color-text-muted);
+}

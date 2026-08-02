@@ -1,0 +1,169 @@
+rules_version = '2';
+
+// ============================================================
+// firestore.rules
+// Security Rules cho hệ thống ShopAdmin
+// Nguyên tắc: chỉ tài khoản có users/{uid}.role == "admin"
+// và users/{uid}.status == "approved" mới được đọc/ghi dữ liệu quản trị.
+// Một số collection phục vụ Frontend Shop (giai đoạn tiếp theo) được mở
+// đọc công khai (products, categories, flashSales, settings) vì khách
+// vãng lai (chưa đăng nhập) cũng cần xem được sản phẩm/khuyến mãi.
+// Cloud Functions dùng Admin SDK nên luôn BỎ QUA các rule này.
+// ============================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---- Hàm tiện ích: kiểm tra người dùng hiện tại có phải admin đã duyệt ----
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isApprovedAdmin() {
+      return isSignedIn() &&
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin" &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.status == "approved";
+    }
+
+    // ---- users: hồ sơ phân quyền ----
+    // Người dùng chỉ đọc được hồ sơ của chính mình (để route guard kiểm tra quyền).
+    // Chỉ admin đã duyệt mới được sửa hồ sơ user khác (vd. duyệt tài khoản mới).
+    match /users/{uid} {
+      allow read: if isSignedIn() && request.auth.uid == uid;
+      allow read, write: if isApprovedAdmin();
+    }
+
+    // ---- customers: khách hàng của cửa hàng ----
+    // Admin đã duyệt: toàn quyền (xem / duyệt / khóa / mở khóa).
+    // Chính khách hàng (giai đoạn Frontend Shop): chỉ đọc/sửa hồ sơ của mình.
+    match /customers/{customerId} {
+      allow read, write: if isApprovedAdmin();
+      allow read, create, update: if isSignedIn() && request.auth.uid == customerId;
+    }
+
+    // ---- categories: danh mục sản phẩm ----
+    // Đọc công khai (Frontend Shop cần hiển thị danh mục kể cả khách vãng lai).
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow write: if isApprovedAdmin();
+    }
+
+    // ---- products: sản phẩm ----
+    // Đọc công khai để hiển thị trên Frontend Shop; chỉ admin được sửa/xóa.
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if isApprovedAdmin();
+    }
+
+    // ---- productImages: album ảnh riêng của từng sản phẩm ----
+    // Mỗi ảnh sản phẩm là 1 document riêng ở đây, LƯU TRỰC TIẾP dữ liệu ảnh
+    // đã nén (base64, định dạng .webp, tối đa ~700KB nhị phân trước khi
+    // encode) ngay trong field "url" của document — KHÔNG dùng Firebase
+    // Storage. Document "products" chỉ lưu mảng "imageIds" tham chiếu tới
+    // các document này. Đọc công khai (Frontend Shop cần hiển thị ảnh sản
+    // phẩm); chỉ admin đã duyệt được thêm/sửa/xóa.
+    match /productImages/{imageId} {
+      allow read: if true;
+      allow write: if isApprovedAdmin();
+    }
+
+    // ---- carts: giỏ hàng đồng bộ theo tài khoản (Frontend Shop) ----
+    // js/cart-store.js đọc/ghi document "carts/{uid}" để đồng bộ giỏ hàng
+    // khi khách đăng nhập trên nhiều thiết bị. Chỉ chính chủ tài khoản mới
+    // được đọc/ghi giỏ hàng của mình; không public, không cho user khác xem.
+    match /carts/{uid} {
+      allow read, write: if isSignedIn() && request.auth.uid == uid;
+    }
+
+    // ---- flashSales: chương trình Flash Sale ----
+    // Đọc công khai để hiển thị countdown/giá sốc trên Frontend Shop.
+    match /flashSales/{flashSaleId} {
+      allow read: if true;
+      allow write: if isApprovedAdmin();
+    }
+
+    // ---- vouchers: mã giảm giá ----
+    // Frontend Shop (js/vouchers.js: fetchMyVouchersDirect, validateVoucherClient,
+    // incrementVoucherUsage) đọc/ghi TRỰC TIẾP bằng Firestore Client SDK, không
+    // qua Cloud Function — nên rule phải mở đúng phần cần thiết, thay vì chặn
+    // toàn bộ như trước (đó là nguyên nhân lỗi "Missing or insufficient permissions").
+    //
+    // Đọc (get + list): công khai, NHƯNG chỉ với voucher đang isActive == true.
+    // Vì "list" trong Firestore Rules được kiểm tra dựa trên dữ liệu THẬT của
+    // từng document mà query trả về, nên:
+    //   - fetchMyVouchersDirect (where isActive == true)      -> luôn khớp rule.
+    //   - validateVoucherClient (where code == X)              -> chỉ đọc được
+    //     nếu voucher đó đang active; voucher inactive sẽ bị từ chối đọc (chấp
+    //     nhận được vì voucher inactive vốn không hợp lệ để áp dụng).
+    // Admin luôn đọc được toàn bộ (kể cả voucher inactive) để quản lý.
+    // Lưu ý đánh đổi: mã voucher đang active sẽ có thể bị liệt kê/dò từ client
+    // (không tránh được nếu không dùng Cloud Function) — nhưng không có quyền
+    // ghi/sửa nên không gây hại, chỉ ảnh hưởng tính "bí mật" của mã.
+    match /vouchers/{voucherId} {
+      allow get, list: if isApprovedAdmin() || resource.data.isActive == true;
+
+      // Tạo/sửa toàn bộ field/xoá: chỉ admin (trang quản trị vouchers.html).
+      allow create, delete: if isApprovedAdmin();
+
+      // Sửa: admin toàn quyền. Khách hàng chỉ được tăng đúng usedCount thêm 1,
+      // không được đổi bất kỳ field nào khác (chặn giả mạo giá trị/điều kiện
+      // voucher), và chỉ khi voucher đang active.
+      allow update: if isApprovedAdmin() || (
+        isSignedIn() &&
+        resource.data.isActive == true &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(["usedCount"]) &&
+        request.resource.data.usedCount == resource.data.usedCount + 1
+      );
+    }
+
+    // ---- orders: đơn hàng ----
+    // Admin: toàn quyền quản lý & đổi trạng thái.
+    // Khách hàng (Frontend Shop): được tạo đơn của chính mình và chỉ xem
+    // lại đơn có customerId trùng uid của mình, không được sửa/xóa trực
+    // tiếp (mọi thay đổi trạng thái đi qua Admin hoặc Cloud Functions).
+    match /orders/{orderId} {
+      allow read, write: if isApprovedAdmin();
+      allow create: if isSignedIn() && request.resource.data.customerId == request.auth.uid;
+      allow read: if isSignedIn() && resource.data.customerId == request.auth.uid;
+
+      // ---- statusHistory: lịch sử thay đổi trạng thái của 1 đơn hàng ----
+      // Chỉ admin (hoặc Cloud Functions qua Admin SDK) được ghi; không sửa/xóa.
+      match /statusHistory/{historyId} {
+        allow read: if isApprovedAdmin();
+        allow read: if isSignedIn() && get(/databases/$(database)/documents/orders/$(orderId)).data.customerId == request.auth.uid;
+        allow create: if isApprovedAdmin();
+        allow update, delete: if false;
+      }
+    }
+
+    // ---- shippingFees: phí ship theo Tỉnh/Thành + Quận/Huyện ----
+    // Đọc công khai (Frontend Shop - js/checkout.js - cần đọc để hiển thị
+    // phí ship theo địa chỉ giao hàng, kể cả khách vãng lai chưa đăng nhập).
+    // Chỉ admin đã duyệt được thêm/sửa/xóa (trang admin/shipping.html).
+    match /shippingFees/{feeId} {
+      allow read: if true;
+      allow write: if isApprovedAdmin();
+    }
+
+    // ---- settings: cấu hình chung của website (logo, banner, SEO, liên hệ...) ----
+    // Đọc công khai (Frontend Shop cần hiển thị logo/footer/SEO); chỉ admin được sửa.
+    match /settings/{docId} {
+      allow read: if true;
+      allow write: if isApprovedAdmin();
+    }
+
+    // ---- systemLogs: nhật ký thao tác hệ thống ----
+    // Chỉ admin được xem; chỉ được tạo mới (không sửa/xóa để đảm bảo tính toàn vẹn log).
+    match /systemLogs/{logId} {
+      allow read: if isApprovedAdmin();
+      allow create: if isApprovedAdmin();
+      allow update, delete: if false;
+    }
+
+    // ---- Mặc định: từ chối tất cả những gì không khớp rule ở trên ----
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

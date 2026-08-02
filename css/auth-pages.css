@@ -1,0 +1,151 @@
+/* ============================================================
+   auth-pages.css — Layout cho login.html & register.html
+   (Banner tiêu đề + khung form căn giữa, cùng ngôn ngữ thiết kế với
+   profile.css / shop-products.css: nền trắng, bo góc mềm, shadow nhẹ)
+   ============================================================ */
+
+.auth-banner {
+    margin-top: var(--header-height);
+    background: var(--color-bg-soft);
+    padding: 36px 0 28px;
+}
+
+.auth-banner .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-bottom: 10px;
+}
+
+.auth-banner .breadcrumb a:hover {
+    color: var(--color-accent);
+}
+
+.auth-banner .breadcrumb svg {
+    width: 13px;
+    height: 13px;
+    color: var(--color-text-muted);
+}
+
+.auth-banner__title {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.auth-banner__desc {
+    font-size: 13.5px;
+    color: var(--color-text-secondary);
+    margin-top: 6px;
+}
+
+.auth-section {
+    padding: 48px 0 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.auth-shell {
+    width: 100%;
+    max-width: 440px;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 40px 36px;
+    animation: auth-shell-in 0.35s var(--ease);
+}
+
+@keyframes auth-shell-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-shell__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-md);
+    background: var(--color-accent-light);
+    color: var(--color-accent-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.auth-shell__icon svg {
+    width: 26px;
+    height: 26px;
+}
+
+.auth-shell__icon--success {
+    background: var(--color-success-light);
+    color: var(--color-success);
+}
+
+.auth-shell__title {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.auth-shell__subtitle {
+    font-size: 13.5px;
+    color: var(--color-text-secondary);
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.auth-shell__footer {
+    margin-top: 22px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+}
+
+.auth-shell__footer a {
+    color: var(--color-accent);
+    font-weight: 700;
+}
+
+.auth-shell__footer a:hover {
+    text-decoration: underline;
+}
+
+.auth-form__top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 7px;
+}
+
+.auth-form__forgot {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--color-accent);
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.auth-form__forgot:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 560px) {
+    .auth-shell {
+        padding: 32px 22px;
+    }
+}

@@ -1,0 +1,9 @@
+/* ============================================================
+   shipping.css — Trang Quản lý Phí Ship
+   Phần lớn UI dùng chung từ shared-components.css
+   (.filter-bar, .import-bar, .table, .pagination, .modal-form...).
+   ============================================================ */
+
+#ship-filter-province {
+    min-width: 200px;
+}

@@ -1,0 +1,220 @@
+/* ============================================================
+   login.css — Trang đăng nhập Admin
+   Lấy cảm hứng từ Stripe / Vercel / Notion: split-screen, tối giản, tinh tế
+   ============================================================ */
+
+.login-shell {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+}
+
+/* ---- Panel trái: thương hiệu ---- */
+.login-brand {
+    position: relative;
+    background: linear-gradient(155deg, #0B1220 0%, #14213F 55%, #1D3A8A 100%);
+    overflow: hidden;
+    padding: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.login-brand::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 20% 20%, rgba(96, 165, 250, 0.25) 0%, transparent 40%),
+        radial-gradient(circle at 85% 75%, rgba(37, 99, 235, 0.35) 0%, transparent 45%);
+}
+
+.login-brand__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+}
+
+.login-brand__top {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.login-brand__mark {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #2563EB 0%, #60A5FA 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 800;
+    font-size: 17px;
+    box-shadow: 0 12px 24px rgba(37, 99, 235, 0.35);
+}
+
+.login-brand__name {
+    color: #fff;
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.login-brand__tag {
+    color: #93A3C4;
+    font-size: 12px;
+    margin-top: 1px;
+}
+
+.login-brand__body {
+    position: relative;
+    z-index: 1;
+    max-width: 440px;
+}
+
+.login-brand__headline {
+    color: #fff;
+    font-size: 33px;
+    font-weight: 800;
+    line-height: 1.28;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px;
+}
+
+.login-brand__headline span {
+    color: #7FA6FF;
+}
+
+.login-brand__desc {
+    color: #A9B6D6;
+    font-size: 14.5px;
+    line-height: 1.7;
+}
+
+.login-brand__stats {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 32px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.login-brand__stat-value {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+}
+
+.login-brand__stat-label {
+    color: #8393B9;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+/* ---- Panel phải: form ---- */
+.login-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background: var(--color-bg);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 380px;
+}
+
+.login-card__header {
+    margin-bottom: 32px;
+}
+
+.login-card__title {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+}
+
+.login-card__subtitle {
+    font-size: 13.5px;
+    color: var(--color-text-secondary);
+}
+
+.login-form__top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 7px;
+}
+
+.login-form__forgot {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--color-accent);
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.login-form__forgot:hover {
+    text-decoration: underline;
+}
+
+.login-card__footer {
+    margin-top: 28px;
+    text-align: center;
+    font-size: 12.5px;
+    color: var(--color-text-muted);
+}
+
+/* ---- Overlay loading toàn màn hình khi xác thực ---- */
+.auth-loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(244, 246, 251, 0.85);
+    backdrop-filter: blur(6px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.auth-loading-overlay.is-visible {
+    display: flex;
+}
+
+.auth-loading-overlay .btn-spinner {
+    width: 32px;
+    height: 32px;
+    border-width: 3px;
+    border-color: var(--color-border-strong);
+    border-top-color: var(--color-accent);
+}
+
+.auth-loading-overlay__text {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+}
+
+@media (max-width: 940px) {
+    .login-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .login-brand {
+        display: none;
+    }
+}

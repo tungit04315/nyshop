@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phí Ship · ShopAdmin</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/shared-components.css" />
+    <link rel="stylesheet" href="../css/shipping.css" />
+</head>
+
+<body data-page="shipping">
+    <div class="app-shell">
+        <!-- ==================== SIDEBAR ==================== -->
+        <aside class="sidebar" id="sidebar"></aside>
+
+        <!-- ==================== MAIN ==================== -->
+        <div class="main">
+            <header class="header">
+                <div>
+                    <div class="header__title">Phí Ship</div>
+                    <div class="header__subtitle">Thiết lập phí vận chuyển theo Tỉnh/Thành và Quận/Huyện.</div>
+                </div>
+                <div class="header__actions">
+                    <button class="header__icon-btn" aria-label="Thông báo">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                        <span class="dot"></span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="content">
+                <div class="filter-bar">
+                    <div class="filter-search">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+                            <path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                        <input type="text" id="ship-search" placeholder="Tìm theo Tỉnh/Thành hoặc Quận/Huyện..." />
+                    </div>
+
+                    <select class="filter-select" id="ship-filter-province">
+                        <option value="all">Tất cả Tỉnh/Thành</option>
+                    </select>
+
+                    <div class="page-toolbar__spacer"></div>
+
+                    <div class="import-bar">
+                        <input type="file" id="ship-import-file" accept=".xlsx,.xls" />
+                        <button type="button" class="btn btn--ghost" id="btn-import-excel">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 16V4m0 0L7 9m5-5l5 5" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+                            Import Excel
+                        </button>
+                    </div>
+                    <button type="button" class="btn btn--primary" id="btn-add-shipping">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2"
+                                stroke-linecap="round" />
+                        </svg>
+                        Thêm khu vực
+                    </button>
+                </div>
+
+                <div class="card card--flush">
+                    <div class="table-toolbar" style="padding: 20px 20px 0;">
+                        <div class="table-toolbar__count">
+                            Hiển thị <strong id="ship-count-shown">0</strong> / <strong id="ship-count-total">0</strong>
+                            khu vực
+                        </div>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Tỉnh / Thành phố</th>
+                                    <th>Quận / Huyện</th>
+                                    <th>Phí ship</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ship-table-body">
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="skeleton" style="height: 20px;"></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination" style="margin: 0 20px 20px;">
+                        <div class="pagination__info" id="pagination-info">Trang 1</div>
+                        <div class="pagination__controls" id="pagination-controls"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SheetJS: đọc file Excel (.xlsx/.xls) trực tiếp trên trình duyệt -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script type="module" src="../js/entry.js"></script>
+</body>
+
+</html>

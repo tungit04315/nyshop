@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thanh toán · ShopViet</title>
+    <meta name="description" content="Điền thông tin nhận hàng, chọn voucher và hoàn tất đặt hàng tại ShopViet." />
+
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/shop-forms.css" />
+    <link rel="stylesheet" href="css/profile.css" />
+    <link rel="stylesheet" href="css/cart.css" />
+    <link rel="stylesheet" href="css/checkout.css" />
+</head>
+
+<body data-page="checkout">
+
+    <!-- ==================== HEADER (component) ==================== -->
+    <header id="site-header"></header>
+
+    <main>
+        <section class="cart-banner">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="index.html">Trang chủ</a>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 6l6 6-6 6" />
+                    </svg>
+                    <a href="cart.html">Giỏ hàng</a>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 6l6 6-6 6" />
+                    </svg>
+                    <span>Thanh toán</span>
+                </div>
+                <h1 class="cart-banner__title">Thanh toán</h1>
+            </div>
+        </section>
+
+        <div class="container">
+
+            <!-- ---- Loading ---- -->
+            <div id="checkout-loading" class="cart-card" style="margin:36px 0;">
+                <div class="skeleton" style="height:64px;margin-bottom:14px;border-radius:14px;"></div>
+                <div class="skeleton" style="height:64px;border-radius:14px;"></div>
+            </div>
+
+            <!-- ---- Trạng thái trống: không có sản phẩm nào được chọn để thanh toán ---- -->
+            <div id="checkout-empty" class="cart-empty" style="display:none;margin:36px 0;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                    <circle cx="9" cy="21" r="1.5" />
+                    <circle cx="19" cy="21" r="1.5" />
+                    <path d="M2.5 3h2l2.4 12.4a2 2 0 002 1.6h8.7a2 2 0 002-1.6L21 8H6" />
+                </svg>
+                <div class="cart-empty__title">Chưa có sản phẩm để thanh toán</div>
+                <p>Vui lòng quay lại giỏ hàng và chọn ít nhất 1 sản phẩm trước khi thanh toán.</p>
+                <a href="cart.html" class="btn btn--accent">Quay lại giỏ hàng</a>
+            </div>
+
+            <!-- ---- Thành công ---- -->
+            <div id="checkout-success" class="cart-empty" style="display:none;margin:36px 0;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
+                    style="color:var(--color-success);">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M8 12l3 3 5-6" />
+                </svg>
+                <div class="cart-empty__title" id="checkout-success-title">Đặt hàng thành công!</div>
+                <p id="checkout-success-desc">Cảm ơn bạn đã mua sắm tại ShopViet. Đơn hàng của bạn đang chờ xử lý.</p>
+                <div style="display:flex;gap:12px;">
+                    <a href="index.html" class="btn btn--ghost">Về trang chủ</a>
+                    <a href="profile.html" class="btn btn--accent">Xem đơn hàng của tôi</a>
+                </div>
+            </div>
+
+            <!-- ---- Form thanh toán ---- -->
+            <div class="checkout-layout" id="checkout-content" style="display:none;">
+
+                <section class="checkout-main">
+
+                    <!-- ---- Thông tin người nhận ---- -->
+                    <div class="cart-card">
+                        <div class="checkout-card__title">Thông tin người nhận</div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="co-fullname">Họ và tên *</label>
+                                <input type="text" id="co-fullname" class="form-input" />
+                                <div class="form-error" id="co-fullname-error"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="co-phone">Số điện thoại *</label>
+                                <input type="tel" id="co-phone" class="form-input" />
+                                <div class="form-error" id="co-phone-error"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ---- Địa chỉ giao hàng ---- -->
+                    <div class="cart-card">
+                        <div class="checkout-card__title">Địa chỉ giao hàng</div>
+
+                        <div id="checkout-shipping-loading" class="form-hint">Đang tải danh sách khu vực giao hàng…
+                        </div>
+
+                        <div id="checkout-shipping-empty" class="checkout-inline-empty" style="display:none;">
+                            Cửa hàng chưa thiết lập khu vực giao hàng nào. Vui lòng liên hệ shop để được hỗ trợ.
+                        </div>
+
+                        <div id="checkout-shipping-fields" style="display:none;">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="co-province">Tỉnh / Thành phố *</label>
+                                    <select id="co-province" class="form-input">
+                                        <option value="">— Chọn Tỉnh/Thành —</option>
+                                    </select>
+                                    <div class="form-error" id="co-province-error"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="co-district">Quận / Huyện *</label>
+                                    <select id="co-district" class="form-input" disabled>
+                                        <option value="">— Chọn Quận/Huyện —</option>
+                                    </select>
+                                    <div class="form-error" id="co-district-error"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="co-address">Địa chỉ cụ thể *</label>
+                                <input type="text" id="co-address" class="form-input"
+                                    placeholder="Số nhà, tên đường, phường/xã..." />
+                                <div class="form-error" id="co-address-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="co-note">Ghi chú (tuỳ chọn)</label>
+                                <textarea id="co-note" class="form-input"
+                                    placeholder="Ví dụ: giao giờ hành chính, gọi trước khi giao..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ---- Phương thức thanh toán ---- -->
+                    <div class="cart-card">
+                        <div class="checkout-card__title">Phương thức thanh toán</div>
+                        <label class="checkout-payment-option is-active">
+                            <input type="radio" name="payment-method" value="cod" checked />
+                            <span class="checkout-payment-option__box"></span>
+                            <span class="checkout-payment-option__info">
+                                <span class="checkout-payment-option__name">Thanh toán khi nhận hàng (COD)</span>
+                                <span class="checkout-payment-option__desc">Thanh toán bằng tiền mặt cho nhân viên giao
+                                    hàng.</span>
+                            </span>
+                        </label>
+                    </div>
+
+                    <!-- ---- Sản phẩm đã chọn ---- -->
+                    <div class="cart-card">
+                        <div class="checkout-card__title">Sản phẩm (<span id="checkout-items-count">0</span>)</div>
+                        <div id="checkout-items-list" class="checkout-items-list"></div>
+                    </div>
+
+                </section>
+
+                <!-- ---- Tóm tắt & Đặt hàng ---- -->
+                <aside class="cart-summary">
+                    <div class="cart-card cart-summary__card">
+
+                        <div class="checkout-voucher" id="checkout-voucher-block">
+                            <div id="checkout-voucher-applied" style="display:none;">
+                                <div class="cart-voucher__applied" style="margin-top:0;">
+                                    <div>
+                                        <div class="cart-voucher__applied-code" id="checkout-voucher-code"></div>
+                                        <div class="cart-voucher__applied-desc" id="checkout-voucher-desc"></div>
+                                    </div>
+                                    <button type="button" class="cart-voucher__remove"
+                                        id="checkout-voucher-remove-btn">Gỡ</button>
+                                </div>
+                            </div>
+                            <div id="checkout-voucher-empty" style="display:none;">
+                                <div class="cart-voucher__input-row">
+                                    <input type="text" class="form-input" id="checkout-voucher-code-input"
+                                        placeholder="Nhập mã giảm giá" autocomplete="off" />
+                                    <button type="button" class="btn btn--accent" id="checkout-voucher-apply-btn">Áp
+                                        dụng</button>
+                                </div>
+                                <div class="form-error" id="checkout-voucher-code-error"></div>
+                            </div>
+                        </div>
+
+                        <div class="cart-summary__divider"></div>
+
+                        <div class="cart-summary__row">
+                            <span>Tạm tính</span>
+                            <strong id="checkout-summary-subtotal">0 ₫</strong>
+                        </div>
+                        <div class="cart-summary__row">
+                            <span>Phí vận chuyển</span>
+                            <strong id="checkout-summary-shipping">— ₫</strong>
+                        </div>
+                        <div class="cart-summary__row cart-summary__row--discount">
+                            <span>Voucher giảm giá</span>
+                            <strong id="checkout-summary-discount">−0 ₫</strong>
+                        </div>
+                        <div class="cart-summary__divider"></div>
+                        <div class="cart-summary__row cart-summary__row--total">
+                            <span>Tổng cộng</span>
+                            <strong id="checkout-summary-total">0 ₫</strong>
+                        </div>
+
+                        <button type="button" class="btn btn--accent cart-summary__checkout-btn"
+                            id="checkout-place-order-btn">Đặt hàng</button>
+                    </div>
+                </aside>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- ==================== FOOTER (component) ==================== -->
+    <footer id="site-footer"></footer>
+
+    <script type="module" src="js/site-entry.js"></script>
+</body>
+
+</html>

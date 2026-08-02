@@ -1,0 +1,606 @@
+/* ============================================================
+   components.css — Component tái sử dụng: Button, Badge, Card,
+   Skeleton, Product Card, Category Card, Countdown, Toast
+   ============================================================ */
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: var(--radius-full);
+  font-size: 14px;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.btn--primary {
+  background: var(--color-text-primary);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-accent);
+}
+
+.btn--accent {
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+  color: #fff;
+  box-shadow: var(--shadow-accent);
+}
+
+.btn--accent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 36px rgba(37, 99, 235, 0.32);
+}
+
+.btn--ghost {
+  background: #fff;
+  color: var(--color-text-primary);
+  border: 1.5px solid var(--color-border-strong);
+}
+
+.btn--ghost:hover {
+  border-color: var(--color-text-primary);
+}
+
+.btn--light {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(6px);
+}
+
+.btn--light:hover {
+  background: #fff;
+  color: var(--color-text-primary);
+}
+
+.btn--sm {
+  padding: 9px 18px;
+  font-size: 13px;
+}
+
+.btn--danger {
+  background: var(--color-danger);
+  color: #fff;
+}
+
+.btn--danger:hover {
+  background: #B91C1C;
+  transform: translateY(-2px);
+  box-shadow: 0 20px 36px rgba(220, 38, 38, 0.28);
+}
+
+/* ---- Badges ---- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 11px;
+  border-radius: var(--radius-full);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.badge--accent {
+  background: var(--color-accent-light);
+  color: var(--color-accent-dark);
+}
+
+.badge--danger {
+  background: var(--color-danger-light);
+  color: var(--color-danger);
+}
+
+.badge--success {
+  background: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.badge--dark {
+  background: var(--color-text-primary);
+  color: #fff;
+}
+
+.badge--warning {
+  background: var(--color-warning-light);
+  color: var(--color-warning);
+}
+
+.badge--neutral {
+  background: var(--color-bg-soft);
+  color: var(--color-text-secondary);
+}
+
+/* ============================================================
+   SKELETON LOADING
+   ============================================================ */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: #EEF1F6;
+  border-radius: var(--radius-sm);
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.7) 50%, transparent 100%);
+  transform: translateX(-100%);
+  animation: skeleton-sweep 1.5s infinite;
+}
+
+@keyframes skeleton-sweep {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton--text {
+  height: 14px;
+  border-radius: 6px;
+}
+
+.skeleton--title {
+  height: 20px;
+  border-radius: 6px;
+  width: 60%;
+}
+
+/* ============================================================
+   PRODUCT CARD
+   ============================================================ */
+.product-card {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+  cursor: default;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+
+.product-card__media {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: var(--color-bg-soft);
+  overflow: hidden;
+}
+
+.product-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-spring);
+  opacity: 0;
+}
+
+.product-card__media img.is-loaded {
+  opacity: 1;
+}
+
+.product-card:hover .product-card__media img {
+  transform: scale(1.06);
+}
+
+.product-card__media-empty {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+}
+
+.product-card__media-empty svg {
+  width: 40px;
+  height: 40px;
+}
+
+.product-card__badges {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 2;
+}
+
+.product-card__badge-out {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  z-index: 3;
+}
+
+.product-card__body {
+  padding: 16px 18px 20px;
+}
+
+.product-card__category {
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  margin-bottom: 6px;
+}
+
+.product-card__name {
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-text-primary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 40px;
+}
+
+.product-card__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.product-card__price {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--color-accent-dark);
+}
+
+.product-card__price--danger {
+  color: var(--color-danger);
+}
+
+.product-card__price-original {
+  font-size: 12.5px;
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+
+/* ---- Skeleton variant của product card ---- */
+.product-card--skeleton .product-card__media {
+  background: transparent;
+}
+
+/* ---- Nút "Thêm vào giỏ hàng" nhanh (Giai đoạn 2) ---- */
+.product-card__quick-add {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-full);
+  background: #fff;
+  color: var(--color-accent);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(8px) scale(0.9);
+  transition: opacity var(--transition-fast), transform var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+}
+
+.product-card:hover .product-card__quick-add {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.product-card__quick-add:hover {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.product-card__quick-add:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.product-card__quick-add-icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.product-card__quick-add-icon svg {
+  width: 17px;
+  height: 17px;
+}
+
+.product-card__quick-add-icon--check {
+  opacity: 0;
+  transform: scale(0.5);
+  color: var(--color-success);
+}
+
+.product-card__quick-add.is-added {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  background: var(--color-success-light);
+}
+
+.product-card__quick-add.is-added .product-card__quick-add-icon--cart {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+.product-card__quick-add.is-added .product-card__quick-add-icon--check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Trên di động luôn hiện sẵn (không có hover) */
+@media (hover: none) {
+  .product-card__quick-add {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================================================
+   CATEGORY CARD
+   ============================================================ */
+.category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 12px;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-soft);
+  border: 1px solid transparent;
+  transition: all var(--transition-base);
+  text-align: center;
+}
+
+.category-card:hover {
+  background: #fff;
+  border-color: var(--color-border);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.category-card__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition-base);
+}
+
+.category-card:hover .category-card__icon {
+  background: var(--color-accent);
+  color: #fff;
+  transform: scale(1.08);
+}
+
+.category-card__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.category-card__name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* ============================================================
+   COUNTDOWN (Flash Sale — demo UI)
+   ============================================================ */
+.countdown {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.countdown__box {
+  min-width: 44px;
+  padding: 8px 6px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  text-align: center;
+}
+
+.countdown__box strong {
+  display: block;
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown__box span {
+  font-size: 9.5px;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.countdown__sep {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 800;
+}
+
+/* ============================================================
+   TOAST (thông báo nhẹ — dùng cho placeholder UI: giỏ hàng, đăng nhập)
+   ============================================================ */
+.toast-container {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: var(--color-text-primary);
+  color: #fff;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  font-size: 13.5px;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all var(--transition-base);
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Toast nâng cao (toast.js): icon + message + nút đóng + phân loại màu ---- */
+.toast--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast--leaving {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.toast__icon {
+  display: flex;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+}
+
+.toast__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.toast__message {
+  flex: 1;
+  line-height: 1.5;
+}
+
+.toast__close {
+  flex-shrink: 0;
+  font-size: 18px;
+  line-height: 1;
+  color: inherit;
+  opacity: 0.6;
+  padding: 0 0 0 6px;
+}
+
+.toast__close:hover {
+  opacity: 1;
+}
+
+.toast--success {
+  background: #16311F;
+}
+
+.toast--success .toast__icon {
+  color: #4ADE80;
+}
+
+.toast--error {
+  background: #3A1414;
+}
+
+.toast--error .toast__icon {
+  color: #F87171;
+}
+
+.toast--warning {
+  background: #3A2A0E;
+}
+
+.toast--warning .toast__icon {
+  color: #FBBF24;
+}
+
+.toast--info {
+  background: var(--color-text-primary);
+}
+
+.toast--info .toast__icon {
+  color: #93C5FD;
+}
+
+/* ============================================================
+   GRID chung cho danh sách sản phẩm
+   ============================================================ */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 1080px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+}

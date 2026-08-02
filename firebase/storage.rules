@@ -1,0 +1,44 @@
+rules_version = '2';
+
+// ============================================================
+// storage.rules
+// Security Rules cho Firebase Storage.
+// Ảnh sản phẩm / thương hiệu (logo, banner) cần hiển thị công khai trên
+// Frontend Shop nên cho đọc tự do; chỉ admin đã duyệt (kiểm tra chéo qua
+// Firestore) mới được tải lên / xóa, và giới hạn dung lượng + định dạng
+// để tránh rác / lạm dụng Storage.
+// ============================================================
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isApprovedAdmin() {
+      return request.auth != null &&
+        firestore.exists(/databases/(default)/documents/users/$(request.auth.uid)) &&
+        firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == "admin" &&
+        firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.status == "approved";
+    }
+
+    function isValidImage() {
+      return request.resource.size < 5 * 1024 * 1024 // tối đa 5MB
+        && request.resource.contentType.matches("image/.*");
+    }
+
+    // LƯU Ý: Ảnh sản phẩm KHÔNG còn lưu trên Storage — toàn bộ ảnh sản phẩm
+    // (đã nén + chuyển sang .webp, xem js/image-upload.js) được lưu trực
+    // tiếp dưới dạng base64 trong document Firestore (collection
+    // "productImages", xem firestore.rules). Vì vậy không còn match
+    // "/products/{allPaths=**}" ở đây nữa.
+
+    // ---- Ảnh cấu hình chung: settings/logo, settings/banner ----
+    match /settings/{allPaths=**} {
+      allow read: if true;
+      allow write: if isApprovedAdmin() && isValidImage();
+    }
+
+    // ---- Mặc định: từ chối tất cả đường dẫn khác ----
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

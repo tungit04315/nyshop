@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng ký · ShopViet</title>
+    <meta name="description"
+        content="Đăng ký tài khoản ShopViet để theo dõi đơn hàng, quản lý địa chỉ và nhận ưu đãi dành riêng cho thành viên." />
+
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/shop-forms.css" />
+    <link rel="stylesheet" href="css/auth-pages.css" />
+</head>
+
+<body data-page="register">
+
+    <!-- ==================== HEADER (component) ==================== -->
+    <header id="site-header"></header>
+
+    <main>
+        <section class="auth-banner">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="index.html">Trang chủ</a>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 6l6 6-6 6" />
+                    </svg>
+                    <span>Đăng ký</span>
+                </div>
+                <h1 class="auth-banner__title">Tạo tài khoản mới</h1>
+                <p class="auth-banner__desc">Đăng ký thành viên để mua sắm nhanh hơn tại ShopViet.</p>
+            </div>
+        </section>
+
+        <section class="auth-section">
+            <div class="container">
+                <div class="auth-shell" id="register-shell">
+
+                    <!-- ---- FORM ĐĂNG KÝ ---- -->
+                    <div id="register-form-view">
+                        <div class="auth-shell__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="8" r="4" />
+                                <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
+                                <path d="M19 8h4M21 6v4" />
+                            </svg>
+                        </div>
+                        <div class="auth-shell__title">Đăng ký</div>
+                        <p class="auth-shell__subtitle">Điền thông tin bên dưới để tạo tài khoản khách hàng.</p>
+
+                        <form id="register-form" novalidate>
+                            <div class="form-group">
+                                <label class="form-label" for="rf-fullname">Họ và tên *</label>
+                                <input type="text" id="rf-fullname" class="form-input" placeholder="Nguyễn Văn A"
+                                    autocomplete="name" />
+                                <div class="form-error" id="rf-fullname-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="rf-email">Email *</label>
+                                <input type="email" id="rf-email" class="form-input" placeholder="ban@email.com"
+                                    autocomplete="email" />
+                                <div class="form-error" id="rf-email-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="rf-phone">Số điện thoại *</label>
+                                <input type="tel" id="rf-phone" class="form-input" placeholder="0912345678"
+                                    autocomplete="tel" />
+                                <div class="form-error" id="rf-phone-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="rf-password">Mật khẩu *</label>
+                                <div class="form-input-wrap">
+                                    <input type="password" id="rf-password" class="form-input"
+                                        placeholder="Tối thiểu 6 ký tự" autocomplete="new-password" />
+                                    <button type="button" class="form-input-icon-btn" data-toggle-password="rf-password"
+                                        aria-label="Hiện/ẩn mật khẩu">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                                            <circle cx="12" cy="12" r="3" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="form-error" id="rf-password-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="rf-confirm">Xác nhận mật khẩu *</label>
+                                <div class="form-input-wrap">
+                                    <input type="password" id="rf-confirm" class="form-input"
+                                        placeholder="Nhập lại mật khẩu" autocomplete="new-password" />
+                                    <button type="button" class="form-input-icon-btn" data-toggle-password="rf-confirm"
+                                        aria-label="Hiện/ẩn mật khẩu">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                                            <circle cx="12" cy="12" r="3" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="form-error" id="rf-confirm-error"></div>
+                            </div>
+
+                            <label class="form-checkbox" style="margin-bottom:20px;">
+                                <input type="checkbox" id="rf-terms" />
+                                <span>Tôi đồng ý với Điều khoản dịch vụ và Chính sách bảo mật của ShopViet</span>
+                            </label>
+                            <div class="form-error" id="rf-terms-error"></div>
+
+                            <button type="submit" class="btn btn--accent" style="width:100%;justify-content:center;"
+                                id="rf-submit-btn">
+                                Đăng ký
+                            </button>
+                        </form>
+
+                        <div class="auth-shell__footer">
+                            Đã có tài khoản? <a href="login.html">Đăng nhập ngay</a>
+                        </div>
+                    </div>
+
+                    <!-- ---- THÔNG BÁO ĐĂNG KÝ THÀNH CÔNG (ẩn mặc định) ---- -->
+                    <div id="register-success-view" style="display:none;text-align:center;">
+                        <div class="auth-shell__icon auth-shell__icon--success">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M8 12l3 3 5-6" />
+                            </svg>
+                        </div>
+                        <div class="auth-shell__title">Đăng ký thành công!</div>
+                        <p class="auth-shell__subtitle">
+                            Tài khoản đang chờ quản trị viên phê duyệt.<br />
+                            Bạn có thể đăng nhập ngay, nhưng cần chờ được duyệt trước khi đặt hàng.
+                        </p>
+                        <a href="login.html" class="btn btn--accent" style="width:100%;justify-content:center;">
+                            Đến trang đăng nhập
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== FOOTER (component) ==================== -->
+    <footer id="site-footer"></footer>
+
+    <script type="module" src="js/site-entry.js"></script>
+</body>
+
+</html>

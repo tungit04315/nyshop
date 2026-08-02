@@ -1,0 +1,21 @@
+{
+  "name": "shopadmin-functions",
+  "description": "Cloud Functions cho hệ thống ShopAdmin (đổi trạng thái đơn hàng, voucher, flash sale, tồn kho, log hệ thống)",
+  "private": true,
+  "main": "index.js",
+  "engines": {
+    "node": "20"
+  },
+  "scripts": {
+    "lint": "echo \"(chưa cấu hình linter)\" && exit 0",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^5.0.0",
+    "nodemailer": "^6.9.13"
+  }
+}

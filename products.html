@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tất cả sản phẩm · ShopViet</title>
+  <meta name="description" content="Khám phá toàn bộ sản phẩm tại ShopViet — chính hãng, đa dạng, cập nhật liên tục." />
+
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/shop-forms.css" />
+  <link rel="stylesheet" href="css/shop-products.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+</head>
+
+<body data-page="products">
+
+  <!-- ==================== HEADER (component) ==================== -->
+  <header id="site-header"></header>
+
+  <main>
+    <!-- ==================== PAGE BANNER ==================== -->
+    <section class="page-banner">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="index.html">Trang chủ</a>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 6l6 6-6 6" />
+          </svg>
+          <span>Sản phẩm</span>
+        </div>
+        <h1 class="page-banner__title">Tất cả sản phẩm</h1>
+        <p class="page-banner__count" id="page-banner-count">Đang tải…</p>
+      </div>
+    </section>
+
+    <!-- ==================== CATALOG (Filter + Grid) ==================== -->
+    <div class="container">
+      <div class="catalog">
+
+        <!-- ---- Filter Panel (UI — chưa gắn logic lọc thật) ---- -->
+        <aside class="filter-panel">
+          <div class="filter-block">
+            <div class="filter-block__title">Danh mục</div>
+            <div id="filter-category-list"></div>
+          </div>
+
+          <div class="filter-block">
+            <div class="filter-block__title">Khoảng giá</div>
+            <div class="filter-price-range">
+              <input type="text" placeholder="Từ" disabled />
+              <span>—</span>
+              <input type="text" placeholder="Đến" disabled />
+            </div>
+          </div>
+
+          <div class="filter-block">
+            <div class="filter-block__title">Tình trạng</div>
+            <label class="filter-option">
+              <span style="display:flex;align-items:center;gap:10px;"><span class="filter-option__check"></span> Còn
+                hàng</span>
+            </label>
+            <label class="filter-option">
+              <span style="display:flex;align-items:center;gap:10px;"><span class="filter-option__check"></span> Đang
+                khuyến mãi</span>
+            </label>
+          </div>
+
+          <div class="filter-note">
+            Bộ lọc sẽ được kích hoạt ở giai đoạn tiếp theo của dự án.
+          </div>
+        </aside>
+
+        <!-- ---- Danh sách sản phẩm ---- -->
+        <section>
+          <div class="catalog-toolbar">
+            <div class="catalog-toolbar__result" id="catalog-result-count">Đang tải…</div>
+            <div class="catalog-toolbar__right">
+              <select class="sort-select" disabled>
+                <option>Mới nhất</option>
+                <option>Giá: Thấp đến cao</option>
+                <option>Giá: Cao đến thấp</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="product-grid" id="products-grid"></div>
+
+          <div class="pagination">
+            <button class="pagination__btn" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 6l-6 6 6 6" />
+              </svg>
+            </button>
+            <button class="pagination__btn is-active">1</button>
+            <button class="pagination__btn" disabled>2</button>
+            <button class="pagination__btn" disabled>3</button>
+            <button class="pagination__btn" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </button>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER (component) ==================== -->
+  <footer id="site-footer"></footer>
+
+  <script type="module" src="js/site-entry.js"></script>
+</body>
+
+</html>

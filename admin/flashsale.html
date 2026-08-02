@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flash Sale · ShopAdmin</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/shared-components.css" />
+    <link rel="stylesheet" href="../css/flashsale.css" />
+</head>
+
+<body data-page="flashsale">
+    <div class="app-shell">
+        <!-- ==================== SIDEBAR ==================== -->
+        <aside class="sidebar" id="sidebar"></aside>
+
+        <!-- ==================== MAIN ==================== -->
+        <div class="main">
+            <header class="header">
+                <div>
+                    <div class="header__title">Flash Sale</div>
+                    <div class="header__subtitle">Quản lý các chương trình giảm giá theo thời gian giới hạn.</div>
+                </div>
+                <div class="header__actions">
+                    <button class="header__icon-btn" aria-label="Thông báo">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                        <span class="dot"></span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="content">
+                <div class="filter-bar">
+                    <div class="filter-search">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+                            <path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                        <input type="text" id="fs-search" placeholder="Tìm theo tên chương trình..." />
+                    </div>
+
+                    <select class="filter-select" id="fs-filter-status">
+                        <option value="all">Tất cả trạng thái</option>
+                        <option value="upcoming">Sắp diễn ra</option>
+                        <option value="running">Đang chạy</option>
+                        <option value="ended">Đã kết thúc</option>
+                    </select>
+
+                    <div class="page-toolbar__spacer"></div>
+
+                    <button type="button" class="btn btn--primary" id="btn-add-flashsale">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2"
+                                stroke-linecap="round" />
+                        </svg>
+                        Thêm chương trình
+                    </button>
+                </div>
+
+                <div class="card card--flush">
+                    <div class="table-toolbar" style="padding: 20px 20px 0;">
+                        <div class="table-toolbar__count">
+                            Hiển thị <strong id="fs-count-shown">0</strong> / <strong id="fs-count-total">0</strong>
+                            chương trình
+                        </div>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Chương trình</th>
+                                    <th>Sản phẩm</th>
+                                    <th>Thời gian</th>
+                                    <th>Đếm ngược</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="fs-table-body">
+                                <tr>
+                                    <td colspan="6">
+                                        <div class="skeleton" style="height: 20px;"></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination" style="margin: 0 20px 20px;">
+                        <div class="pagination__info" id="pagination-info">Trang 1</div>
+                        <div class="pagination__controls" id="pagination-controls"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../js/entry.js"></script>
+</body>
+
+</html>

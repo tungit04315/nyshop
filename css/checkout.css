@@ -1,0 +1,140 @@
+/* ============================================================
+   checkout.css — Thanh toán (Giai đoạn 2)
+   ============================================================ */
+
+.checkout-layout {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    align-items: start;
+    gap: 28px;
+    padding: 36px 0 100px;
+}
+
+.checkout-card__title {
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.checkout-inline-empty {
+    font-size: 13px;
+    color: var(--color-warning);
+    background: var(--color-warning-light);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    line-height: 1.6;
+}
+
+/* ---- Phương thức thanh toán ---- */
+.checkout-payment-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border: 1.5px solid var(--color-accent);
+    background: var(--color-accent-light);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+}
+
+.checkout-payment-option input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.checkout-payment-option__box {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    border-radius: 50%;
+    border: 5px solid var(--color-accent);
+    background: #fff;
+}
+
+.checkout-payment-option__name {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+}
+
+.checkout-payment-option__desc {
+    display: block;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-top: 3px;
+}
+
+/* ---- Danh sách sản phẩm (chỉ xem) ---- */
+.checkout-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.checkout-item-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.checkout-item-row__thumb {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    border-radius: var(--radius-md);
+    background: var(--color-bg-soft);
+    overflow: hidden;
+}
+
+.checkout-item-row__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.checkout-item-row__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.checkout-item-row__name {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.checkout-item-row__meta {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    margin-top: 3px;
+}
+
+.checkout-item-row__subtotal {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    flex-shrink: 0;
+}
+
+/* ---- Voucher trong tóm tắt ---- */
+.checkout-voucher {
+    margin-bottom: 4px;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 980px) {
+    .checkout-layout {
+        grid-template-columns: 1fr;
+    }
+}

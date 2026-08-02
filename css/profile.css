@@ -1,0 +1,396 @@
+/* ============================================================
+   profile.css — Layout cho profile.html (Trang cá nhân khách hàng)
+   ============================================================ */
+
+.profile-banner {
+    margin-top: var(--header-height);
+    background: var(--color-bg-soft);
+    padding: 36px 0 28px;
+}
+
+.profile-banner .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-bottom: 10px;
+}
+
+.profile-banner .breadcrumb a:hover {
+    color: var(--color-accent);
+}
+
+.profile-banner .breadcrumb svg {
+    width: 13px;
+    height: 13px;
+    color: var(--color-text-muted);
+}
+
+.profile-banner__title {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.profile-section {
+    padding: 40px 0 96px;
+}
+
+.profile-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 80px 0;
+    color: var(--color-text-secondary);
+    font-size: 13.5px;
+}
+
+.profile-shell {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 28px;
+    align-items: start;
+}
+
+/* ---- Sidebar ---- */
+.profile-sidebar {
+    position: sticky;
+    top: calc(var(--header-height) + 20px);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.profile-card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.profile-card--identity {
+    padding: 26px 20px;
+    text-align: center;
+}
+
+.profile-avatar {
+    position: relative;
+    width: 84px;
+    height: 84px;
+    margin: 0 auto 14px;
+}
+
+.profile-avatar__img {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    background: var(--color-accent-light);
+    color: var(--color-accent-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: 800;
+    overflow: hidden;
+}
+
+.profile-avatar__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-avatar__edit {
+    position: absolute;
+    right: -2px;
+    bottom: -2px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: #fff;
+    border: 3px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.profile-avatar__edit svg {
+    width: 14px;
+    height: 14px;
+}
+
+.profile-avatar__edit:hover {
+    background: var(--color-accent-dark);
+}
+
+.profile-identity__name {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 3px;
+}
+
+.profile-identity__email {
+    font-size: 12.5px;
+    color: var(--color-text-secondary);
+    margin-bottom: 12px;
+    word-break: break-all;
+}
+
+.profile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px;
+}
+
+.profile-nav__item {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: var(--radius-md);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-align: left;
+    transition: all var(--transition-fast);
+}
+
+.profile-nav__item svg {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+}
+
+.profile-nav__item:hover {
+    background: var(--color-bg-soft);
+    color: var(--color-text-primary);
+}
+
+.profile-nav__item.is-active {
+    background: var(--color-accent-light);
+    color: var(--color-accent-dark);
+}
+
+/* ---- Content ---- */
+.profile-content {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 32px;
+    min-height: 420px;
+}
+
+.profile-pending-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: var(--color-warning-light);
+    color: #92620A;
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    font-size: 13px;
+    line-height: 1.55;
+    margin-bottom: 26px;
+}
+
+.profile-pending-banner svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.profile-panel {
+    display: none;
+}
+
+.profile-panel.is-active {
+    display: block;
+    animation: profile-fade-in 0.25s var(--ease);
+}
+
+@keyframes profile-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profile-panel__header {
+    margin-bottom: 24px;
+}
+
+.profile-panel__title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.profile-panel__desc {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+}
+
+/* ---- Đơn hàng ---- */
+.order-item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    margin-bottom: 12px;
+}
+
+.order-item__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.order-item__code {
+    font-size: 13.5px;
+    font-weight: 700;
+}
+
+.order-item__date {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    margin-top: 2px;
+}
+
+.order-item__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.order-item__items-count {
+    font-size: 12.5px;
+    color: var(--color-text-secondary);
+}
+
+.order-item__total {
+    font-size: 14.5px;
+    font-weight: 800;
+    color: var(--color-accent-dark);
+}
+
+/* ---- Voucher ---- */
+.voucher-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.voucher-item {
+    position: relative;
+    border: 1.5px dashed var(--color-border-strong);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    background: var(--color-bg-soft);
+}
+
+.voucher-item__code {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--color-accent-dark);
+    letter-spacing: 0.03em;
+}
+
+.voucher-item__value {
+    font-size: 13px;
+    font-weight: 700;
+    margin: 6px 0 4px;
+}
+
+.voucher-item__desc {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+}
+
+.voucher-item__expiry {
+    font-size: 11.5px;
+    color: var(--color-text-muted);
+    margin-top: 8px;
+}
+
+/* ---- Trạng thái rỗng ---- */
+.profile-empty {
+    text-align: center;
+    padding: 48px 12px;
+    color: var(--color-text-secondary);
+}
+
+.profile-empty svg {
+    width: 40px;
+    height: 40px;
+    color: var(--color-text-muted);
+    margin-bottom: 12px;
+}
+
+.profile-empty__title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 4px;
+}
+
+.profile-empty p {
+    font-size: 12.5px;
+}
+
+/* ---- Skeleton riêng cho danh sách đơn hàng / voucher ---- */
+.profile-skeleton-row {
+    height: 74px;
+    border-radius: var(--radius-md);
+    margin-bottom: 12px;
+}
+
+@media (max-width: 900px) {
+    .profile-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-sidebar {
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .profile-card--identity {
+        width: 100%;
+    }
+
+    .profile-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        flex: 1;
+    }
+
+    .profile-nav__item {
+        width: auto;
+    }
+
+    .profile-content {
+        padding: 22px;
+    }
+
+    .voucher-grid {
+        grid-template-columns: 1fr;
+    }
+}
